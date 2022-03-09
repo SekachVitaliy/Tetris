@@ -22,6 +22,7 @@ class GameTetris:
 
     def generate_current_figure(self):
         x = random.randint(0, 5)
+        x = 5
         self.current_figure = self.figures[x]
         self.base_row = 0
         self.base_col = 3
@@ -271,6 +272,7 @@ class GameTetris:
                         8 > test_pos_col + 2 > -1:
                     in_bounds = True
                     if self.matrix[test_pos_row + 0][test_pos_col + 0] == 0 and \
+                            self.matrix[test_pos_row + 1][test_pos_col + 0] == 0 and \
                             self.matrix[test_pos_row + 1][test_pos_col + 1] == 0 and \
                             self.matrix[test_pos_row + 1][test_pos_col + 2] == 0:
                         non_overlap = True
@@ -293,6 +295,7 @@ class GameTetris:
                         8 > test_pos_col - 2 > -1:
                     in_bounds = True
                     if self.matrix[test_pos_row + 0][test_pos_col + 0] == 0 and \
+                            self.matrix[test_pos_row - 1][test_pos_col + 0] == 0 and \
                             self.matrix[test_pos_row - 1][test_pos_col - 1] == 0 and \
                             self.matrix[test_pos_row - 1][test_pos_col - 2] == 0:
                         non_overlap = True
@@ -304,6 +307,7 @@ class GameTetris:
                         8 > test_pos_col - 1 > -1:
                     in_bounds = True
                     if self.matrix[test_pos_row + 0][test_pos_col + 0] == 0 and \
+                            self.matrix[test_pos_row + 0][test_pos_col - 1] == 0 and \
                             self.matrix[test_pos_row + 1][test_pos_col - 1] == 0 and \
                             self.matrix[test_pos_row + 2][test_pos_col - 1] == 0:
                         non_overlap = True
@@ -426,22 +430,26 @@ class GameTetris:
                 self.matrix[self.base_row + 1][self.base_col - 1] = value
 
         elif self.current_figure == 'SIX':  # figure      *
-            #                                              **
+            #                                             ***
             if self.current_rotate == 'ROT_LEFT':
                 self.matrix[self.base_row + 0][self.base_col + 0] = value
+                self.matrix[self.base_row + 1][self.base_col + 0] = value
                 self.matrix[self.base_row + 1][self.base_col + 1] = value
                 self.matrix[self.base_row + 1][self.base_col + 2] = value
             elif self.current_rotate == 'ROT_UP':
                 self.matrix[self.base_row + 0][self.base_col + 0] = value
+                self.matrix[self.base_row + 0][self.base_col + 1] = value
                 self.matrix[self.base_row - 1][self.base_col + 1] = value
                 self.matrix[self.base_row - 2][self.base_col + 1] = value
 
             elif self.current_rotate == 'ROT_RIGHT':
                 self.matrix[self.base_row + 0][self.base_col + 0] = value
+                self.matrix[self.base_row - 1][self.base_col + 0] = value
                 self.matrix[self.base_row - 1][self.base_col - 1] = value
                 self.matrix[self.base_row - 1][self.base_col - 2] = value
 
             elif self.current_rotate == 'ROT_DOWN':
                 self.matrix[self.base_row + 0][self.base_col + 0] = value
+                self.matrix[self.base_row + 0][self.base_col - 1] = value
                 self.matrix[self.base_row + 1][self.base_col - 1] = value
                 self.matrix[self.base_row + 2][self.base_col - 1] = value
